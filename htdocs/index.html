@@ -150,7 +150,23 @@
                 <div class="openwebrx-panel-line frequencies-container">
                     <div class="frequencies">
                         <div class="webrx-actual-freq"></div>
-                        <div class="webrx-mouse-freq"></div>
+                        <div class="openwebrx-panel-flex-line webrx-mouse-freq-container">
+                            <div class="webrx-mouse-freq"></div>
+                            <select id="webrx-mouse-step" title="Snap to frequency">
+                                <option value="1">Off</option>
+                                <option value="5">5 Hz</option>
+                                <option value="10">10 Hz</option>
+                                <option value="25">25 Hz</option>
+                                <option value="50">50 Hz</option>
+                                <option value="100" selected>100 Hz</option>
+                                <option value="250">250 Hz</option>
+                                <option value="500">500 Hz</option>
+                                <option value="1000">1 kHz</option>
+                                <option value="2500">2.5 kHz</option>
+                                <option value="5000">5 kHz</option>
+                                <option value="10000">10 kHz</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="openwebrx-button openwebrx-square-button openwebrx-bookmark-button" style="display:none;" title="Add bookmark...">
                         <span class="sprite sprite-bookmark"></span>
