@@ -578,6 +578,11 @@ img.openwebrx-mirror-img
 	width: inherit;
 }
 
+.openwebrx-settings-text {
+	margin: auto;
+	margin-left: 0;
+}
+
 #openwebrx-panel-status
 {
 	margin: 0 0 0 5.9px;
