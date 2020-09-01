@@ -8,14 +8,23 @@ function FrequencyDisplay(element) {
 FrequencyDisplay.prototype.setupElements = function() {
     this.displayContainer = $('<div>');
     this.digitContainer = $('<span>');
-    this.displayContainer.html([this.digitContainer, $('<span> MHz</span>')]);
+    this.displayContainer.html([this.digitContainer, $('<span>')]);
     this.element.html(this.displayContainer);
 };
 
 FrequencyDisplay.prototype.setFrequency = function(freq) {
     this.frequency = freq;
-    var formatted = (freq / 1e6).toLocaleString(undefined, {maximumFractionDigits: 4, minimumFractionDigits: 4});
+    this.update();
+}
+
+FrequencyDisplay.prototype.update = function() {
+    var unitText = $('#option-freq-unit option:selected').text();
+    var unit = '1e' + $('#option-freq-unit').val();
+    var decimals = $('#option-freq-decimals').val();
+
+    var formatted = (this.frequency / unit).toLocaleString(undefined, { maximumFractionDigits: decimals, minimumFractionDigits: decimals });
     var children = this.digitContainer.children();
+
     for (var i = 0; i < formatted.length; i++) {
         if (!this.digits[i]) {
             this.digits[i] = $('<span>');
@@ -32,6 +41,7 @@ FrequencyDisplay.prototype.setFrequency = function(freq) {
     while (this.digits.length > formatted.length) {
         this.digits.pop().remove();
     }
+    this.displayContainer.children().last().text(' ' + unitText);
 };
 
 function TuneableFrequencyDisplay(element) {
@@ -65,8 +75,9 @@ TuneableFrequencyDisplay.prototype.setupEvents = function() {
         me.element.trigger('frequencychange', newFrequency);
     });
 
-    var submit = function(){
-        var freq = parseInt(me.input.val());
+    var submit = function () {
+        var unit = '1e' + $('#option-freq-unit').val();
+        var freq = Math.round(parseFloat(me.input.val()) * unit);
         if (!isNaN(freq)) {
             me.element.trigger('frequencychange', freq);
         }
@@ -84,7 +95,8 @@ TuneableFrequencyDisplay.prototype.setupEvents = function() {
         e.stopPropagation();
     });
     me.element.on('click', function(){
-        me.input.val(me.frequency);
+        var unit = '1e' + $('#option-freq-unit').val();
+        me.input.val(me.frequency / unit);
         me.input.show();
         me.displayContainer.hide();
         me.input.focus();
