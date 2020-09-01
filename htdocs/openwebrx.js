@@ -1379,6 +1379,7 @@ function openwebrx_init() {
     initPanels();
     $('.webrx-mouse-freq').frequencyDisplay();
     $('#openwebrx-panel-receiver').demodulatorPanel();
+    $('#openwebrx-panel-settings').settingsPanel();
     window.addEventListener("resize", openwebrx_resize);
     bookmarks = new BookmarkBar();
     initSliders();

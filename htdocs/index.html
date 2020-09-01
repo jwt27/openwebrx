@@ -148,6 +148,20 @@
         <div id="openwebrx-panels-container-right">
             <div class="openwebrx-panel" id="openwebrx-panel-settings" data-panel-name="client-params" style="display: none; width: 259px;">
                 ${settingslink}
+                <div class="openwebrx-panel-line openwebrx-panel-flex-line">
+                    <div class="openwebrx-settings-text">Frequency unit:</div>
+                    <select id="option-freq-unit">
+                        <option value="0">Hz</option>
+                        <option value="3">kHz</option>
+                        <option value="6">MHz</option>
+                        <option value="9">GHz</option>
+                    </select>
+                </div>
+                <div class="openwebrx-panel-line openwebrx-panel-flex-line">
+                    <div class="openwebrx-settings-text">Frequency decimal digits:</div>
+                    <select id="option-freq-decimals">
+                    </select>
+                </div>
             </div>
             <div class="openwebrx-panel" id="openwebrx-panel-receiver" data-panel-name="client-params" style="width: 259px;">
                 <div class="openwebrx-panel-line frequencies-container">
