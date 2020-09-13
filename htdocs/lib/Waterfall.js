@@ -147,9 +147,20 @@ Waterfall.measureRange = function(data) {
 
     // Find min/max levels within the range
     data = data.slice(range.start * data.length, range.end * data.length);
+
+    var min = [];
+    var max = [];
+    var max_slice = 1e5;
+    var n = Math.ceil(data.length / max_slice);
+    for (var i = 0; i < n; ++i)
+    {
+        var slice = data.slice(i * max_slice, (i + 1) * max_slice);
+        min.push(Math.min.apply(Math, slice));
+        max.push(Math.max.apply(Math, slice));
+    }
     var levels = {
-        min: Math.min.apply(Math, data),
-        max: Math.max.apply(Math, data)
+        min: Math.min.apply(Math, min),
+        max: Math.max.apply(Math, max)
     };
 
     if (this.measure_minmax_now) {
