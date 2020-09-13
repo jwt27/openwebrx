@@ -1090,9 +1090,19 @@ function waterfall_measure_minmax_do(what) {
     // this is based on an oversampling factor of about 1,25
     var ignored = .1 * what.length;
     var data = what.slice(ignored, -ignored);
+    var min = [];
+    var max = [];
+    var max_slice = 1e5;
+    var n = Math.ceil(data.length / max_slice);
+    for (var i = 0; i < n; ++i)
+    {
+        slice = data.slice(i * max_slice, (i + 1) * max_slice);
+        min.push(Math.min.apply(Math, slice));
+        max.push(Math.max.apply(Math, slice));
+    }
     return {
-        min: Math.min.apply(Math, data),
-        max: Math.max.apply(Math, data)
+        min: Math.min.apply(Math, min),
+        max: Math.max.apply(Math, max)
     };
 }
 
