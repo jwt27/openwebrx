@@ -198,13 +198,13 @@
                     <div title="Mute on/off" id="openwebrx-mute-off" class="openwebrx-button" onclick="toggleMute();"><span class="sprite sprite-speaker openwebrx-sliderbtn-img"></span></div>
                     <input title="Volume" id="openwebrx-panel-volume" class="openwebrx-panel-slider" type="range" min="0" max="150" value="50" step="1" onchange="updateVolume()" oninput="updateVolume()">
                     <div title="Auto-adjust waterfall colors (right-click for continuous)" id="openwebrx-waterfall-colors-auto" class="openwebrx-button"><span class="sprite sprite-waterfall-auto openwebrx-sliderbtn-img"></span></div>
-                    <input title="Waterfall minimum level" id="openwebrx-waterfall-color-min" class="openwebrx-panel-slider" type="range" min="-200" max="100" value="50" step="1" onchange="updateWaterfallColors(0);" oninput="updateVolume()">
+                    <input title="Waterfall minimum level" id="openwebrx-waterfall-color-min" class="openwebrx-panel-slider" type="range" min="-96" max="0" value="50" step="1" onchange="updateWaterfallColors(0);" oninput="updateVolume()">
                 </div>
                 <div class="openwebrx-panel-line">
                     <div title="Auto-set squelch level" class="openwebrx-squelch-default openwebrx-button"><span class="sprite sprite-squelch openwebrx-sliderbtn-img"></span></div>
                     <input title="Squelch" class="openwebrx-squelch-slider openwebrx-panel-slider" type="range" min="-150" max="0" value="-150" step="1">
                     <div title="Set waterfall colors to default" id="openwebrx-waterfall-colors-default" class="openwebrx-button" onclick="waterfallColorsDefault()"><span class="sprite sprite-waterfall-default openwebrx-sliderbtn-img"></span></div>
-                    <input title="Waterfall maximum level" id="openwebrx-waterfall-color-max" class="openwebrx-panel-slider" type="range" min="-200" max="100" value="50" step="1" onchange="updateWaterfallColors(1);" oninput="updateVolume()">
+                    <input title="Waterfall maximum level" id="openwebrx-waterfall-color-max" class="openwebrx-panel-slider" type="range" min="-96" max="0" value="50" step="1" onchange="updateWaterfallColors(1);" oninput="updateVolume()">
                 </div>
                 <div class="openwebrx-panel-line">
                     <div class="openwebrx-button openwebrx-square-button" onclick="zoomInOneStep();"  title="Zoom in one step"><span class="sprite sprite-zoom-in"></span></div>
