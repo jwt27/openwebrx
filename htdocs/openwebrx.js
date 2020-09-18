@@ -1648,7 +1648,7 @@ function initSpectrum() {
            |___/
 */
 
-var secondary_demod_fft_offset_db = 18; //need to calculate that later
+var secondary_demod_fft_offset_db = 40; //need to calculate that later
 var secondary_demod_canvases_initialized = false;
 var secondary_demod_channel_freq = 1000;
 var secondary_demod_waiting_for_set = false;
