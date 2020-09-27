@@ -584,7 +584,7 @@ function canvas_mouseup(evt) {
 
     if (!canvas_drag) {
         var step = $('#webrx-mouse-step option:selected').val();
-        var freq = Math.round(canvas_get_freq_offset(relativeX) / step) * step;
+        var freq = Math.round((canvas_get_frequency(relativeX)) / step) * step - center_freq;
         $('#openwebrx-panel-receiver').demodulatorPanel().getDemodulator().set_offset_frequency(freq);
     }
     else {
