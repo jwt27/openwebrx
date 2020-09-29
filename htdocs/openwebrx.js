@@ -1245,7 +1245,7 @@ var canvas_actual_line;
 
 function add_canvas() {
     canvas_subcontainer = document.createElement("div");
-    var n = fft_size / canvas_max_width;
+    var n = Math.max(fft_size / canvas_max_width, 1);
     var w = 100 / n;
     for (var i = 0; i < n; ++i) {
         var new_canvas = document.createElement("canvas");
