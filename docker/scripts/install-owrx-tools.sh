@@ -25,15 +25,14 @@ apt-get -y install --no-install-recommends $STATIC_PACKAGES $BUILD_PACKAGES
 
 git clone https://github.com/jketterl/js8py.git
 pushd js8py
-git checkout 888e62be375316882ad2b2ac8e396c3bf857b6fc
+git checkout 0.1.0
 python3 setup.py install
 popd
 rm -rf js8py
 
 git clone https://github.com/jketterl/csdr.git
 cd csdr
-# develop as of 2020-09-06 (fractional_decimator_cc pointer fix)
-git checkout f123f81add2f84e3ada66d66afd53cf96b7fec94
+git checkout 0.17.0
 autoreconf -i
 ./configure
 make
@@ -42,7 +41,7 @@ cd ..
 rm -rf csdr
 
 git clone https://github.com/jketterl/digiham.git
-cmakebuild digiham 95206501be89b38d0267bf6c29a6898e7c65656f
+cmakebuild digiham 0.3.0
 
 apt-get -y purge --autoremove $BUILD_PACKAGES
 apt-get clean

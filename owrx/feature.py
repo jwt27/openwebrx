@@ -7,6 +7,7 @@ import inspect
 from owrx.config import Config
 import shlex
 import os
+from datetime import datetime, timedelta
 
 import logging
 
@@ -15,6 +16,35 @@ logger = logging.getLogger(__name__)
 
 class UnknownFeatureException(Exception):
     pass
+
+
+class FeatureCache(object):
+    sharedInstance = None
+
+    @staticmethod
+    def getSharedInstance():
+        if FeatureCache.sharedInstance is None:
+            FeatureCache.sharedInstance = FeatureCache()
+        return FeatureCache.sharedInstance
+
+    def __init__(self):
+        self.cache = {}
+        self.cachetime = timedelta(hours=2)
+
+    def has(self, feature):
+        if feature not in self.cache:
+            return False
+        now = datetime.now()
+        if self.cache[feature]["valid_to"] < now:
+            return False
+        return True
+
+    def get(self, feature):
+        return self.cache[feature]["value"]
+
+    def set(self, feature, value):
+        valid_to = datetime.now() + self.cachetime
+        self.cache[feature] = {"value": value, "valid_to": valid_to}
 
 
 class FeatureDetector(object):
@@ -93,12 +123,19 @@ class FeatureDetector(object):
         return None
 
     def has_requirement(self, requirement):
+        cache = FeatureCache.getSharedInstance()
+        if cache.has(requirement):
+            return cache.get(requirement)
+
         method = self._get_requirement_method(requirement)
+        result = False
         if method is not None:
-            return method()
+            result = method()
         else:
             logger.error("detection of requirement {0} not implement. please fix in code!".format(requirement))
-        return False
+
+        cache.set(requirement, result)
+        return result
 
     def get_requirement_description(self, requirement):
         return inspect.getdoc(self._get_requirement_method(requirement))

@@ -55,6 +55,7 @@ class DspManager(csdr.output, SdrSourceEventClient):
             "center_freq",
             "start_mod",
             "start_freq",
+            "wfm_deemphasis_tau",
         ))
 
         self.dsp = csdr.dsp(self)
@@ -71,6 +72,8 @@ class DspManager(csdr.output, SdrSourceEventClient):
             self.dsp.set_bpf(*bpf)
 
         def set_dial_freq(key, value):
+            if self.props["center_freq"] is None or self.props["offset_freq"] is None:
+                return
             freq = self.props["center_freq"] + self.props["offset_freq"]
             for parser in self.parsers.values():
                 parser.setDialFrequency(freq)
@@ -105,6 +108,7 @@ class DspManager(csdr.output, SdrSourceEventClient):
             self.props.wireProperty("digital_voice_unvoiced_quality", self.dsp.set_unvoiced_quality),
             self.props.wireProperty("dmr_filter", self.dsp.set_dmr_filter),
             self.props.wireProperty("temporary_directory", self.dsp.set_temporary_directory),
+            self.props.wireProperty("wfm_deemphasis_tau", self.dsp.set_wfm_deemphasis_tau),
             self.props.filter("center_freq", "offset_freq").wire(set_dial_freq),
         ]
 

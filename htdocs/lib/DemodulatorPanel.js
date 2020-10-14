@@ -119,7 +119,9 @@ DemodulatorPanel.prototype.setMode = function(requestedModulation) {
     this.demodulator.on("frequencychange", updateFrequency);
     updateFrequency(this.demodulator.get_offset_frequency());
     var updateSquelch = function(squelch) {
-        self.el.find('.openwebrx-squelch-slider').val(squelch);
+        self.el.find('.openwebrx-squelch-slider')
+            .val(squelch)
+            .attr('title', 'Squelch (' + squelch + ' dB)');
         self.updateHash();
     };
     this.demodulator.on('squelchchange', updateSquelch);
@@ -179,7 +181,7 @@ DemodulatorPanel.prototype.collectParams = function() {
 };
 
 DemodulatorPanel.prototype.startDemodulator = function() {
-    if (!Modes.initComplete()) return;
+    if (!Modes.initComplete() || !this.center_freq) return;
     var params = this.collectParams();
     this._apply(params);
 };
