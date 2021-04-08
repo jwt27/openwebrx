@@ -135,7 +135,7 @@ class Js8Mode(AudioChopperMode):
 
 class Modes(object):
     mappings = [
-        AnalogMode("nfm", "FM", bandpass=Bandpass(-4000, 4000)),
+        AnalogMode("nfm", "FM", bandpass=Bandpass(-5000, 5000)),
         AnalogMode("wfm", "WFM", bandpass=Bandpass(-75000, 75000)),
         AnalogMode("am", "AM", bandpass=Bandpass(-4000, 4000)),
         AnalogMode("lsb", "LSB", bandpass=Bandpass(-3000, -50)),
