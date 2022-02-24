@@ -9,11 +9,21 @@ from typing import Optional
 from owrx.feature import FeatureDetector
 
 
+def makeAgcProfile(name, attack, decay, hang_time):
+    obj = object.__new__(AgcProfile)
+    obj._name_ = name.upper().replace(" ", "_")
+    obj._value_ = name
+    obj.attack = attack
+    obj.decay = decay
+    obj.hangTime = hang_time
+    return obj
+
+
 class Am(BaseDemodulatorChain):
-    def __init__(self, agcProfile: AgcProfile = AgcProfile.SLOW):
+    def __init__(self, agcProfile: AgcProfile = makeAgcProfile("AM", 0.0125, 0.000025, 40000)):
         agc = Agc(Format.FLOAT)
         agc.setProfile(agcProfile)
-        agc.setInitialGain(200)
+        agc.setInitialGain(1000)
         workers = [
             AmDemod(),
             DcBlock(),
@@ -163,9 +173,10 @@ class BCFm(BaseWFm, HdStereo):
 
 
 class Ssb(BaseDemodulatorChain):
-    def __init__(self, agcProfile: AgcProfile = AgcProfile.FAST):
+    def __init__(self, agcProfile: AgcProfile = makeAgcProfile("SSB", 0.025, 0.00001, 40000)):
         agc = Agc(Format.FLOAT)
         agc.setProfile(agcProfile)
+        agc.setInitialGain(1000)
         workers = [
             RealPart(),
             agc,
