@@ -22,7 +22,7 @@ class Am(BaseDemodulatorChain):
         super().__init__(workers)
 
 
-class NFm(BaseDemodulatorChain):
+class NFm(BaseDemodulatorChain, FixedIfSampleRateChain):
     def __init__(self, sampleRate: int, agcProfile: AgcProfile = AgcProfile.SLOW):
         self.sampleRate = sampleRate
         agc = Agc(Format.FLOAT)
@@ -31,16 +31,20 @@ class NFm(BaseDemodulatorChain):
         workers = [
             FmDemod(),
             Limit(Format.FLOAT),
-            NfmDeemphasis(sampleRate),
+            NfmDeemphasis(48000),
+            FractionalDecimator(Format.FLOAT, 48000.0 / self.sampleRate, prefilter=True),
             agc,
         ]
         super().__init__(workers)
+
+    def getFixedIfSampleRate(self):
+        return 48000
 
     def setSampleRate(self, sampleRate: int) -> None:
         if sampleRate == self.sampleRate:
             return
         self.sampleRate = sampleRate
-        self.replace(2, NfmDeemphasis(sampleRate))
+        self.replace(3, FractionalDecimator(Format.FLOAT, 48000.0 / self.sampleRate, prefilter=True))
 
 
 class BaseWFm(BaseDemodulatorChain, FixedIfSampleRateChain, DeemphasisTauChain, MetaProvider, RdsChain):
