@@ -143,6 +143,12 @@ Envelope.prototype.draw = function(visible_range){
     this.drag_ranges = drag_ranges;
 };
 
+Envelope.prototype.mouseover_edge = function(x, key_modifiers) {
+    const dr = Demodulator.draggable_ranges;
+    const r = this.where_clicked(x, this.drag_ranges, key_modifiers);
+    return r === dr.beginning || r === dr.ending;
+};
+
 Envelope.prototype.drag_start = function(x, key_modifiers){
     this.key_modifiers = key_modifiers;
     this.dragged_range = this.where_clicked(x, this.drag_ranges, key_modifiers);

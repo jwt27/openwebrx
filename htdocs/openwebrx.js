@@ -284,6 +284,12 @@ function scale_canvas_mousemove(evt) {
         if (!event_handled)
             UI.setFrequency(UI.getFrequency(get_relative_x(evt)));
     }
+    else {
+        var edge = false;
+        for (i = 0; i < demodulators.length; i++)
+            edge |= demodulators[i].envelope.mouseover_edge(evt.pageX, scale_canvas_drag_params.key_modifiers)
+        scale_canvas.style.cursor = edge ? 'ew-resize' : 'default';
+    }
 }
 
 function frequency_container_mousemove(evt) {
