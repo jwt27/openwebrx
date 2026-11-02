@@ -275,7 +275,8 @@ function scale_canvas_mousemove(evt) {
     {
         scale_canvas_drag_params.drag = true;
         //call the drag_start for all demodulators (and they will decide if they're dragged, based on X coordinate)
-        for (i = 0; i < demodulators.length; i++) event_handled |= demodulators[i].envelope.drag_start(evt.pageX, scale_canvas_drag_params.key_modifiers);
+        for (i = 0; i < demodulators.length; i++)
+            event_handled |= demodulators[i].envelope.drag_start(scale_canvas_drag_params.start_x, scale_canvas_drag_params.key_modifiers);
         scale_canvas.style.cursor = "move";
     }
     else if (scale_canvas_drag_params.drag) {
