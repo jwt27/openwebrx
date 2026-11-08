@@ -783,16 +783,7 @@ function canvas_mousewheel(evt) {
     // Wheel direction
     var dir = evt.deltaY / Math.abs(evt.deltaY) > 0;
 
-    // Zoom when mouse button down, tune otherwise
-    // (optionally, invert this behavior)
-    var zoom_me = (canvas_mouse2_down > 0) || evt.shiftKey?
-        !UI.getWheelSwap() : UI.getWheelSwap();
-
-    if (zoom_me) {
-        zoom_step(dir, get_relative_x(evt), zoom_center_where_calc(evt.pageX));
-    } else {
-        tuneBySteps(dir? -1:1);
-    }
+    zoom_step(dir, get_relative_x(evt), zoom_center_where_calc(evt.pageX));
 
     evt.preventDefault();
 }

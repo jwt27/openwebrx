@@ -14,7 +14,6 @@ UI.volume = -1;
 UI.volumeMuted = -1;
 UI.nrThreshold = -20;
 UI.nrEnabled = false;
-UI.wheelSwap = false;
 UI.spectrum = false;
 UI.bandplan = false;
 UI.cwOffset = null;
@@ -36,7 +35,6 @@ UI.loadSettings = function() {
     this.toggleOpacity(LS.has('ui_opacityBump')? LS.loadBool('ui_opacityBump') : false);
     this.toggleCrossFreq(LS.has('ui_crossfreq')? LS.loadBool('ui_crossfreq') : false);
     this.toggleFrame(LS.has('ui_frame')? LS.loadBool('ui_frame') : false);
-    this.toggleWheelSwap(LS.has('ui_wheel')? LS.loadBool('ui_wheel') : false);
     this.toggleSpectrum(LS.has('ui_spectrum')? LS.loadBool('ui_spectrum') : false);
     this.toggleBandplan(LS.has('ui_bandplan')? LS.loadBool('ui_bandplan') : false);
     this.setWfTheme(LS.has('wf_theme')? LS.loadStr('wf_theme') : 'default');
@@ -494,23 +492,6 @@ UI.toggleCrossFreq = function(on) {
                 }
             });
         }
-    }
-};
-
-// Get current mouse wheel function
-UI.getWheelSwap = function() {
-    return this.wheelSwap;
-};
-
-// Set mouse wheel function (zooming when swapped)
-UI.toggleWheelSwap = function(on) {
-    // If no argument given, toggle wheel swap
-    if (typeof(on) === 'undefined') on = !this.wheelSwap;
-
-    if (this.wheelSwap != on) {
-        this.wheelSwap = on;
-        LS.save('ui_wheel', on);
-        $('#openwebrx-wheel-checkbox').attr('checked', on);
     }
 };
 
