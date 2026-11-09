@@ -765,7 +765,7 @@ class SdrDeviceDescription(object):
             DropdownInput(
                 "tuning_step",
                 "Tuning step",
-                options=[Option(str(i), "{} Hz".format(i)) for i in [1, 10, 20, 50, 100, 500, 1000, 2500, 3000, 5000, 6000, 6250, 8330, 9000, 10000, 12000, 12500, 25000, 50000]],
+                options=[Option(str(i), "{} Hz".format(i)) for i in [1, 10, 25, 50, 100, 250, 500, 1000, 2500, 3000, 5000, 6000, 6250, 8330, 9000, 10000, 12000, 12500, 25000, 50000]],
                 converter=IntConverter(),
             ),
             CheckboxInput(
