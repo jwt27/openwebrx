@@ -813,13 +813,14 @@ class SdrDeviceDescription(object):
             "waterfall_auto_level_default_mode",
             "scheduler",
             "key_locked",
+            "samp_rate",
         ]
         if self.supportsPpm():
             keys += ["ppm"]
         return keys
 
     def getProfileMandatoryKeys(self):
-        return ["name", "center_freq", "samp_rate", "start_freq", "start_mod", "tuning_step"]
+        return ["name", "center_freq", "start_freq", "start_mod", "tuning_step"]
 
     def getProfileOptionalKeys(self):
         keys = [
@@ -834,6 +835,7 @@ class SdrDeviceDescription(object):
             "rig_enabled",
             "rig_rx_enabled",
             "key_locked",
+            "samp_rate",
         ]
         if self.supportsPpm():
             keys += ["ppm"]
