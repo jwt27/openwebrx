@@ -181,10 +181,8 @@ class GeneralSettingsController(SettingsFormController):
                 NumberInput(
                     "fft_size",
                     "FFT size",
-                    infotext="This setting specifies the horizontal resolution of the waterfall. "
-                    + "Raising it higher than 16384 bins may break waterfall display on some web browsers.",
+                    infotext="This setting specifies the horizontal resolution of the waterfall. ",
                     append="bins",
-                    validator=RangeValidator(256, 16384),
                 ),
                 FloatInput(
                     "fft_voverlap_factor",
