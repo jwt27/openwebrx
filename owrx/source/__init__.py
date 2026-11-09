@@ -814,13 +814,14 @@ class SdrDeviceDescription(object):
             "scheduler",
             "key_locked",
             "samp_rate",
+            "tuning_step",
         ]
         if self.supportsPpm():
             keys += ["ppm"]
         return keys
 
     def getProfileMandatoryKeys(self):
-        return ["name", "center_freq", "start_freq", "start_mod", "tuning_step"]
+        return ["name", "center_freq", "start_freq", "start_mod"]
 
     def getProfileOptionalKeys(self):
         keys = [
@@ -836,6 +837,7 @@ class SdrDeviceDescription(object):
             "rig_rx_enabled",
             "key_locked",
             "samp_rate",
+            "tuning_step",
         ]
         if self.supportsPpm():
             keys += ["ppm"]
