@@ -716,13 +716,10 @@ function canvas_mousemove(evt) {
         if (canvas_drag) {
             var deltaX = canvas_drag_last_x - evt.pageX;
             var dpx = range.hps * deltaX;
-
-            if (
-                !(zoom_center_rel + dpx > (bandwidth / 2 - waterfallWidth() * (1 - zoom_center_where) * range.hps)) &&
-                !(zoom_center_rel + dpx < -bandwidth / 2 + waterfallWidth() * zoom_center_where * range.hps)
-            ) {
-                zoom_center_rel += dpx;
-            }
+            var x = zoom_center_rel + dpx;
+            x = Math.min(x,  bandwidth / 2 - waterfallWidth() * (1 - zoom_center_where) * range.hps);
+            x = Math.max(x, -bandwidth / 2 + waterfallWidth() *      zoom_center_where  * range.hps);
+            zoom_center_rel = x;
             resize_canvases(false);
             mkscale();
             bandplan.draw();
